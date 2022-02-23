@@ -29,7 +29,7 @@ public class HttpServer {
                 System.err.println("Accept failed.");
                 System.exit(1);
             }
-            
+
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
