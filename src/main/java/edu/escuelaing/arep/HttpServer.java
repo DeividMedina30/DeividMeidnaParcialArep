@@ -29,7 +29,7 @@ public class HttpServer {
                 System.err.println("Accept failed.");
                 System.exit(1);
             }
-
+            
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
@@ -49,7 +49,7 @@ public class HttpServer {
                 }
             }
 
-            if (file.startsWith("/consulta?lugar=")) {
+            if (file.startsWith("/Apps/")) {
                 //ds
             } else {
                 outputLine = "HTTP/1.1 200 OK\r\n"
