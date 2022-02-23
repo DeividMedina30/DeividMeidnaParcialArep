@@ -62,6 +62,7 @@ public class HttpServer {
                         + "<title>Consultando Clima</title>\n"
                         + "</head>"
                         + "<body>"
+                        + "<h1> Consultando Clima </h1>"
                         + "Web Page"
                         + "</body>"
                         + "</html>" + inputLine;
