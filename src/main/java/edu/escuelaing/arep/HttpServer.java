@@ -1,5 +1,6 @@
 package edu.escuelaing.arep;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.net.*;
 import java.io.*;
 import java.util.*;
@@ -38,6 +39,7 @@ public class HttpServer {
                     new InputStreamReader(clientSocket.getInputStream()));
             String inputLine, outputLine = null;
             String file = "";
+            String[] fileNewConsulta ;
             boolean primeraLinea = true;
             while ((inputLine = in.readLine()) != null) {
                 if (primeraLinea) {
@@ -68,7 +70,8 @@ public class HttpServer {
                         + "<input id='climaButton' type='button' value='calcularClima' class='btns' >"
                         + "</body>"
                         + "</html>" + inputLine;
-            }else if (file.startsWith("/consulta?lugar=")){
+            }else if (file.contains("/consulta?lugar=")){
+                fileNewConsulta = file.split("=");
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
                         + "\r\n"
@@ -82,6 +85,8 @@ public class HttpServer {
                         + "<h1> Consultando Clima con comando con consulta </h1>"
                         + "</body>"
                         + "</html>" + inputLine;
+                outputLine += CreandoConexionApi(fileNewConsulta[1]);
+                out.println(outputLine);
             }else{
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
@@ -97,12 +102,25 @@ public class HttpServer {
                         + "</body>"
                         + "</html>" + inputLine;
             }
+
             out.println(outputLine);
             out.close();
             in.close();
             clientSocket.close();
         }
         serverSocket.close();
+    }
+
+    public static String CreandoConexionApi(String Ciudad) throws IOException {
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + Ciudad +  "&appid=bc337958c219159e9a81d75502e4204d";
+        URL urlClima = new URL(url);
+        HttpsURLConnection conectarUrl = (HttpsURLConnection)urlClima.openConnection();
+        BufferedReader in = new BufferedReader(new InputStreamReader(conectarUrl.getInputStream()));
+        String input, output = "";
+        while ((input = in.readLine()) != null){
+            output += input;
+        }
+        return gson.toJson(output);
     }
 
     static int getPort() {
