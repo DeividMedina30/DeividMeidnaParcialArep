@@ -12,7 +12,7 @@ public class HttpServer {
     public static void main (String [ ] args) throws IOException {
         ServerSocket serverSocket = null;
         try {
-            serverSocket = new ServerSocket(35000);
+            serverSocket = new ServerSocket(getHerokuAssignedPort());
         } catch (IOException e) {
             System.err.println("Could not listen on port: 35000.");
             System.exit(1);
@@ -73,5 +73,15 @@ public class HttpServer {
         serverSocket.close();
     }
 
+    /**
+     * Funcón que me permite obtener el puerto por el cual heroku despliega nuestra aplicación.
+     */
+    public	static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+    }
 
 }
