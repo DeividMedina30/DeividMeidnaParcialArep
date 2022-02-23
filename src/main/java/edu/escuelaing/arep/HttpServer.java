@@ -10,13 +10,13 @@ import java.util.*;
 
 public class HttpServer {
 
+    private static Gson gson;
     private ServerSocket serverSocket;
     private Socket clientSocket;
-    private Gson gson;
 
     public static void main(String[] args) throws Exception {
         ServerSocket serverSocket = null;
-        gson
+        gson = new Gson();
         boolean running = true;
 
         try {
@@ -114,8 +114,8 @@ public class HttpServer {
         serverSocket.close();
     }
 
-    public String CreandoConexionApi(String Ciudad) throws IOException {
-        this.gson = new Gson();
+    public static String CreandoConexionApi(String Ciudad) throws IOException {
+
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + Ciudad +  "&appid=bc337958c219159e9a81d75502e4204d";
         URL urlClima = new URL(url);
         HttpsURLConnection conectarUrl = (HttpsURLConnection)urlClima.openConnection();
