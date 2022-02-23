@@ -63,7 +63,6 @@ public class HttpServer {
                         + "</head>"
                         + "<body>"
                         + "<h1> Consultando Clima </h1>"
-                        + "Web Page"
                         + "</body>"
                         + "</html>" + inputLine;
             }else if (file.startsWith("/Consulta")){
@@ -77,7 +76,7 @@ public class HttpServer {
                         + "<title>Consultando Una consulta</title>\n"
                         + "</head>"
                         + "<body>"
-                        + "Web Page"
+                        + "<h1> Consultando Clima con comando con consulta </h1>"
                         + "</body>"
                         + "</html>" + inputLine;
             }else{
@@ -91,7 +90,7 @@ public class HttpServer {
                         + "<title>No se encontro la pagina</title>\n"
                         + "</head>"
                         + "<body>"
-                        + "Web Page"
+                        + "<h1> No se encontro la pagina </h1>"
                         + "</body>"
                         + "</html>" + inputLine;
             }
