@@ -63,6 +63,9 @@ public class HttpServer {
                         + "</head>"
                         + "<body>"
                         + "<h1> Consultando Clima </h1>"
+                        + "<p>Fahrenheit a Celsius</p>"
+                        + "<input id='ahrenheitd' type='text' class='form-control' placeholder='Ingrese los grados Fahrenheit' >"
+                        + "<input id='fahrenheit_button' type='button' value='calcularCelsius' class='btns' >"
                         + "</body>"
                         + "</html>" + inputLine;
             }else if (file.startsWith("/Consulta")){
