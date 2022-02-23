@@ -36,7 +36,7 @@ public class HttpServer {
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true); //Flujo de salida
             BufferedReader in = new BufferedReader( //Flujo de entrada
                     new InputStreamReader(clientSocket.getInputStream()));
-            String inputLine, outputLine;
+            String inputLine, outputLine = null;
 
             while ((inputLine = in.readLine()) != null) {
                 System.out.println("Received: " + inputLine);
@@ -46,20 +46,49 @@ public class HttpServer {
             }
 
             //Siempre responde la misma página
-
-            outputLine = "HTTP/1.1 200 OK\r\n"
-                    + "Content-Type: text /html\r\n"
-                    + "\r\n"
-                    + "<!DOCTYPE html>"
-                    + "<html>"
-                    + "<head>"
-                    + "<meta charset=\"UTF-8\">"
-                    + "<title>Title of the document</title>\n"
-                    + "</head>"
-                    + "<body>"
-                    + "Web Page"
-                    + "</body>"
-                    + "</html>" + inputLine;
+            if(inputLine.equals("/Clima")) {
+                outputLine = "HTTP/1.1 200 OK\r\n"
+                        + "Content-Type: text /html\r\n"
+                        + "\r\n"
+                        + "<!DOCTYPE html>"
+                        + "<html>"
+                        + "<head>"
+                        + "<meta charset=\"UTF-8\">"
+                        + "<title>Consultando Clima</title>\n"
+                        + "</head>"
+                        + "<body>"
+                        + "Web Page"
+                        + "</body>"
+                        + "</html>" + inputLine;
+            }else if (inputLine.equals("/Consulta")){
+                outputLine = "HTTP/1.1 200 OK\r\n"
+                        + "Content-Type: text /html\r\n"
+                        + "\r\n"
+                        + "<!DOCTYPE html>"
+                        + "<html>"
+                        + "<head>"
+                        + "<meta charset=\"UTF-8\">"
+                        + "<title>Consultando Una consulta</title>\n"
+                        + "</head>"
+                        + "<body>"
+                        + "Web Page"
+                        + "</body>"
+                        + "</html>" + inputLine;
+            }else{
+                outputLine = "HTTP/1.1 200 OK\r\n"
+                        + "Content-Type: text /html\r\n"
+                        + "\r\n"
+                        + "<!DOCTYPE html>"
+                        + "<html>"
+                        + "<head>"
+                        + "<meta charset=\"UTF-8\">"
+                        + "<title>No se encontro la pagina</title>\n"
+                        + "</head>"
+                        + "<body>"
+                        + "Web Page"
+                        + "</body>"
+                        + "</html>" + inputLine;
+            }
             out.println(outputLine);
             out.close();
             in.close();
