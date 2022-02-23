@@ -1,5 +1,7 @@
 package edu.escuelaing.arep;
 
+import com.google.gson.Gson;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.net.*;
 import java.io.*;
@@ -10,10 +12,11 @@ public class HttpServer {
 
     private ServerSocket serverSocket;
     private Socket clientSocket;
-
+    private Gson gson;
 
     public static void main(String[] args) throws Exception {
         ServerSocket serverSocket = null;
+        gson
         boolean running = true;
 
         try {
@@ -111,7 +114,8 @@ public class HttpServer {
         serverSocket.close();
     }
 
-    public static String CreandoConexionApi(String Ciudad) throws IOException {
+    public String CreandoConexionApi(String Ciudad) throws IOException {
+        this.gson = new Gson();
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + Ciudad +  "&appid=bc337958c219159e9a81d75502e4204d";
         URL urlClima = new URL(url);
         HttpsURLConnection conectarUrl = (HttpsURLConnection)urlClima.openConnection();
