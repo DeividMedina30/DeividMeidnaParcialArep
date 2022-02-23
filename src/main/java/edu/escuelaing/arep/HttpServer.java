@@ -37,22 +37,21 @@ public class HttpServer {
             BufferedReader in = new BufferedReader( //Flujo de entrada
                     new InputStreamReader(clientSocket.getInputStream()));
             String inputLine, outputLine = null;
-            boolean primeraLinea = true;
             String file = "";
+            boolean primeraLinea = true;
             while ((inputLine = in.readLine()) != null) {
-                System.out.println("Received: " + inputLine);
                 if (primeraLinea) {
                     file = inputLine.split(" ")[1];
-                    System.out.println("File: " + file);
                     primeraLinea = false;
                 }
+                System.out.println("Received: " + inputLine);
                 if (!in.ready()) {
                     break;
                 }
             }
 
             //Siempre responde la misma página
-            if(inputLine.startsWith("/Clima")) {
+            if(file.startsWith("/Clima")) {
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
                         + "\r\n"
@@ -66,7 +65,7 @@ public class HttpServer {
                         + "Web Page"
                         + "</body>"
                         + "</html>" + inputLine;
-            }else if (inputLine.equals("/Consulta")){
+            }else if (file.startsWith("/Consulta")){
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
                         + "\r\n"
