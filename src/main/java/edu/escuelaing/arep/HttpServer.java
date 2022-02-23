@@ -49,7 +49,7 @@ public class HttpServer {
                     break;
                 }
             }
-
+            System.out.println(file);
             //Siempre responde la misma página
             if(file.startsWith("/Clima")) {
                 outputLine = "HTTP/1.1 200 OK\r\n"
@@ -68,7 +68,7 @@ public class HttpServer {
                         + "<input id='climaButton' type='button' value='calcularClima' class='btns' >"
                         + "</body>"
                         + "</html>" + inputLine;
-            }else if (file.startsWith("/Consulta")){
+            }else if (file.startsWith("/consulta?lugar=")){
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text /html\r\n"
                         + "\r\n"
