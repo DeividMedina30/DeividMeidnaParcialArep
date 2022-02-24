@@ -70,7 +70,15 @@ public class HttpServer {
                         + "<h1> Consultando Clima </h1>"
                         + "<p>Consulte el Clima de una Ciudad o Lugar</p>"
                         + "<input id='climatextid' type='text' class='form-control' placeholder='Ingrese la Ciudad o lugar del cual desea conocer el Clima. ' >"
-                        + "<input id='climaButton' type='button' value='calcularClima' class='btns' >"
+                        + "<input id='climaButton' type='button' value='calcularClima' onclick='consultarClima() class='btns' >"
+                        + "<div  id='obtenerConsultaClimaidiv'></div>"
+                        +"<script src=\"https://unpkg.com/axios/dist/axios.min.js\" >"
+                        +"function consultarClima() {"
+                        +"var value = document.getElementById('climaButton').value;"
+                        +"var urlClima = 'https://clima1api.herokuapp.com/consulta?lugar='+value;"
+                        +"axios.get(urlClima) .then(res => { var obj = JSON.parse(res.data); $('#obtenerConsultaClimaidiv').text(obj); console.log(obj); })"
+                        +"}"
+                        +"</script>"
                         + "</body>"
                         + "</html>" + inputLine;
             }else if (file.contains("/consulta?lugar=")){
@@ -85,7 +93,7 @@ public class HttpServer {
                         + "<title>Consultando Una consulta</title>\n"
                         + "</head>"
                         + "<body>"
-                        + "<h1> Consultando Clima con comando con consulta </h1>"
+                        + "<h1> Consultando el clima de una Ciudad o Lugar. </h1>"
                         + "</body>"
                         + "</html>" + inputLine;
                 outputLine += CreandoConexionApi(fileNewConsulta[1]);
